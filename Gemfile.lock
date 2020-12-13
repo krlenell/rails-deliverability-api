@@ -111,6 +111,7 @@ GEM
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     pg (1.2.3)
+    phonelib (0.6.46)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -199,6 +200,7 @@ DEPENDENCIES
   faker
   listen (~> 3.3)
   pg (~> 1.1)
+  phonelib
   pry-rails
   puma (~> 5.0)
   rails (~> 6.1.0)
