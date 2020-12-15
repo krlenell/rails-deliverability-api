@@ -23,6 +23,7 @@ class Device < ApplicationRecord
     if disabled_at.is_a?(Date) || disabled_at.nil?
       return
     end
-      errors.add(:disabled_at, "must be a date or nil")
+      #errors.add(:disabled_at, "must be a date or nil")
+    errors[:disabled_at] << "must be a date or nil"
   end
 end

@@ -18,5 +18,8 @@ FactoryBot.define do
     factory :invalid_number do
       phone_number {12345}
     end
+    factory :invalid_date do
+      disabled_at{ "yesterday" }
+    end
   end
 end
