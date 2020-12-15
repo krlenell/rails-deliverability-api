@@ -17,7 +17,7 @@ class Device < ApplicationRecord
 
   validate :disabled_at_is_date?
 
-  has_many :heartbeat
+  has_many :heartbeat, :report
 
   private
 
