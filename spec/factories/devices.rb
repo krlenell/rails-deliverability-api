@@ -11,11 +11,12 @@
 #
 FactoryBot.define do
   factory :device do
-    #phone_number { "MyText"
-    #carrier { "MyText" }
-    #disabled_at { "2020-12-13 21:16:59" }
     phone_number { Faker::PhoneNumber.cell_phone_in_e164 }
     carrier { Faker::Name.name  }
     disabled_at{ nil }
+
+    factory :invalid_number do
+      phone_number {12345}
+    end
   end
 end

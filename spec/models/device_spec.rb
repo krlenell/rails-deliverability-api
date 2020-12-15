@@ -14,8 +14,6 @@ require 'rails_helper'
 RSpec.describe Device, type: :model do
 
   subject(:device) {FactoryBot.build(:device)}
-
-  pending "add some examples to (or delete) #{__FILE__}"
   describe 'validations' do
     it {should validate_presence_of(:phone_number)}
     it {should validate_presence_of(:carrier)}
