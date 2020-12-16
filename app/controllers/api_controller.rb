@@ -62,7 +62,17 @@ class ApiController < ApplicationController
   end
 
   def terminate
-    render json: 'terminated'
+    id = params[:device_id]
+    if !Device.exists?(id: id)
+      render json: {error: "id does not exist"}, status: 500
+      return
+    end
+    device = Device.find_by(id: id)
+    if device.update(disabled_at: DateTime.now)
+      render :nothing => true, status: :no_content
+    else
+      render json: {error: "could not terminate device"}, status: 500
+    end
   end
 
   private

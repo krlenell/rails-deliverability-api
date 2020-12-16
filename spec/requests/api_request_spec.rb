@@ -12,21 +12,21 @@ RSpec.describe "Apis", type: :request do
   describe "POST /register" do
     it "returns http success" do
       post "/api/register"
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:created)
     end
   end
 
   describe "POST /alive" do
     it "returns http success" do
       post "/api/alive"
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:created)
     end
   end
 
   describe "POST /report" do
     it "returns http success" do
       post "/api/report"
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:created)
     end
   end
 

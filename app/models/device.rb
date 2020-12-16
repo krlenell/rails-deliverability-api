@@ -23,7 +23,7 @@ class Device < ApplicationRecord
   private
 
   def disabled_at_is_date?
-    if disabled_at.is_a?(Date) || disabled_at.nil?
+    if disabled_at.is_a?(ActiveSupport::TimeWithZone) || disabled_at.nil?
       return
     end
       #errors.add(:disabled_at, "must be a date or nil")
