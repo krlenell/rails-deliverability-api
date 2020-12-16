@@ -26,8 +26,13 @@ class ApiController < ApplicationController
   def alive
     id = params[:device_id]
     # test if this device id exists in db
-    if !Device.exists?(id: id)
+    device = Device.find_by(id: id)
+    if !device
       render json: {error: "no device for that id found"}, status: 500
+      return
+    end
+    if device.disabled_at
+      render json: {error: "device has been deactivated"}, status: 500
       return
     end
     heartbeat = Heartbeat.new
