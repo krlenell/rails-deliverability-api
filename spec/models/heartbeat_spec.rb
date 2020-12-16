@@ -1,5 +1,13 @@
+# == Schema Information
+#
+# Table name: heartbeats
+#
+#  id         :uuid             not null, primary key
+#  device_id  :uuid             not null
+#  created_at :datetime         not null
+#
 require 'rails_helper'
 
 RSpec.describe Heartbeat, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it {should validate_presence_of(:device_id)}
 end
