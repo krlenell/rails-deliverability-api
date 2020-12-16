@@ -1,24 +1,46 @@
-# README
+# Deliverability API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
 
-Things you may want to cover:
+This was created as a small assessment.  It is a small Rails JSON API which helps test whether text messages are being sent or dropped by a carrier.  
 
-* Ruby version
+## Tech
 
-* System dependencies
+### Requirements
 
-* Configuration
+- Ruby 2.5.8
+- Rails 6.1.0
+- PostgreSQL 12.4+
 
-* Database creation
+### Usage
 
-* Database initialization
+#### To run the server:
 
-* How to run the test suite
+    bundle install
+    rake db:create
+    rake db:migrate
+    rails s
+    
+App should then run on localhost:3000
+    
+#### To run testing: 
 
-* Services (job queues, cache servers, search engines, etc.)
+    bundle install
+    rake db:create
+    RAILS_ENV=test rake db:migrate
+    rspec
+ 
+ ### Notable Gems
+ 
+ - RSpec
+ - Shoulda-matchers
+ - Factorybot
+ - Faker
+ - Pry-rails
+ - phonelib
+ 
+ ## Considerations
+ 
+ This application is incomplete.  It should function properly, however there is a bit to do in terms of testing.  Some Rails conventions have not been implemented, such as `strong params`.  Model validations could be focused on to clean up the controller.  Most importantly, FactoryBot should be further explored to build proper tests which account for the dynamically generated `uuid`s generated for the `device_id` used as arguments for several endpoints.  
 
-* Deployment instructions
-
-* ...
+This is literally my first Rails app though, and served as a great learning tool.  Despite difficulty in finding documentation, I think Rails is an excellent and powerful backend tool.  Hopefully by completing this application I can build a strong Rails foundation and utilize Rails as backend in the future.
