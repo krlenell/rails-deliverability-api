@@ -22,5 +22,22 @@ RSpec.describe ApiController, type: :controller do
     end
   end
 
+  describe "POST #alive" do
+    context "with invalid params" do
+      it "fails when given nonexistant device_id" do
+        post :alive, params: {device_id: "fake device_id"}
+        expect(response).to have_http_status(500)
+      end
+    end
+
+    # context "with valid params" do
+    #   it "succeeds when given a proper device_id" do
+    #     post :alive, params: {device_id: "Some real device_id"}
+    #     expect(response).to have_http_status(:created)
+    #   end
+    # end
+  end
+
+
 
 end
