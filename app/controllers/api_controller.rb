@@ -6,6 +6,7 @@ class ApiController < ApplicationController
 
   def register
     phone = parse_phone(params[:phone_number])
+
     #check if phone is valid
     if !phone
       render json: {error: "phone number is invalid"}, status: 500
