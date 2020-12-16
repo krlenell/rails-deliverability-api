@@ -14,4 +14,6 @@ RSpec.describe Report, type: :model do
   it {should validate_presence_of(:device_id)}
   it {should validate_presence_of(:sender)}
   it {should validate_presence_of(:message)}
+
+  it {should belong_to(:device)}
 end

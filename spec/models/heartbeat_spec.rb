@@ -10,4 +10,6 @@ require 'rails_helper'
 
 RSpec.describe Heartbeat, type: :model do
   it {should validate_presence_of(:device_id)}
+
+  it {should belong_to(:device)}
 end
