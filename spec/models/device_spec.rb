@@ -2,7 +2,7 @@
 #
 # Table name: devices
 #
-#  id           :bigint           not null, primary key
+#  id           :uuid             not null, primary key
 #  phone_number :text             not null
 #  carrier      :text             not null
 #  disabled_at  :datetime

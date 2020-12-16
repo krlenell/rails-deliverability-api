@@ -1,5 +1,17 @@
+# == Schema Information
+#
+# Table name: reports
+#
+#  id         :uuid             not null, primary key
+#  device_id  :uuid             not null
+#  sender     :text             not null
+#  message    :text             not null
+#  created_at :datetime         not null
+#
 require 'rails_helper'
 
 RSpec.describe Report, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it {should validate_presence_of(:device_id)}
+  it {should validate_presence_of(:sender)}
+  it {should validate_presence_of(:message)}
 end

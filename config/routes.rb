@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get 'api/index', to: 'api#index'
+
+  post 'api/register', to: 'api#register'
+  post 'api/alive', to: 'api#alive'
+  post 'api/report', to: 'api#report'
+  patch 'api/terminate', to:'api#terminate'
 end
