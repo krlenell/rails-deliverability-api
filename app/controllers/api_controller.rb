@@ -5,9 +5,12 @@ class ApiController < ApplicationController
   end
 
   def register
-    phone = Phonelib.parse(params[:phone_number])
-    #check if phone is valid here
-    phone = phone.e164
+    phone = parse_phone(params[:phone_number])
+    #check if phone is valid
+    if !phone
+      render json: {error: "phone number is invalid"}, status: 500
+      return
+    end
     device = Device.new
     device.phone_number = phone
     device.carrier = params[:carrier]
@@ -37,18 +40,40 @@ class ApiController < ApplicationController
   end
 
   def report
-    # id = params[:device_id]
-    # if !Device.exists?(id: id)
-    #   render json: {error: "no device for that id found"}, status: 500
-    #   return
-    # end
-    # report = Report.new
-    render json: 'report'
+    id = params[:device_id]
+    if !Device.exists?(id: id)
+      render json: {error: "no device for that id found"}, status: 500
+      return
+    end
+    report = Report.new
+    report.device_id = id
+    sender = parse_phone(params[:sender])
+    if !sender
+      render json: {error: "sender number is invalid"}, status: 500
+      return
+    end
+    report.sender = sender
+    report.message = params[:message]
+    if report.save
+      render :nothing => true, status: :created
+    else
+      render json: {error: "report could not be created"}, status: 500
+    end
   end
 
   def terminate
     render json: 'terminated'
   end
 
+  private
+
+  def parse_phone number
+    phone = Phonelib.parse(number)
+    #check if phone is valid
+    if phone.invalid?
+      return
+    end
+    return phone.e164
+  end
 
 end
