@@ -41,7 +41,7 @@ RSpec.describe ApiController, type: :controller do
   describe "POST #report" do
     context "with invalid params" do
       it "fails when given nonexistant device_id" do
-        post :report, params: {device_id: "fake ID", sender: "1253-303-5074", message: "LOL 😁😁😁"}
+        post :report, params: {report: {device_id: "fake ID", sender: "1253-303-5074", message: "LOL 😁😁😁"} }
         expect(response).to have_http_status(500)
       end
       #do another with invalid params that aren't device ID
