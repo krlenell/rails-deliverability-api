@@ -5,18 +5,18 @@ class ApiController < ApplicationController
   end
 
   def register
-    phone = parse_phone(params[:phone_number])
+    phone = parse_phone(device_params[:phone_number])
 
     #check if phone is valid
     if !phone
       render json: {error: "phone number is invalid"}, status: 500
       return
     end
-    device = Device.new
-    device.phone_number = phone
-    device.carrier = params[:carrier]
-    if device.save
-      render json: {device_id: device.id}, status: :created
+    @device = Device.new(device_params)
+    @device.phone_number = phone
+    # device.carrier = params[:carrier]
+    if @device.save
+      render json: {device_id: @device.id}, status: :created
     else
       render json: {error: "device not created"}, status: 500
     end
@@ -90,6 +90,10 @@ class ApiController < ApplicationController
       return
     end
     return phone.e164
+  end
+
+  def device_params
+    params.require(:device).permit(:phone_number, :carrier)
   end
 
 end
