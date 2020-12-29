@@ -14,7 +14,6 @@ class ApiController < ApplicationController
     end
     @device = Device.new(device_params)
     @device.phone_number = phone
-    # device.carrier = params[:carrier]
     if @device.save
       render json: {device_id: @device.id}, status: :created
     else
@@ -46,21 +45,19 @@ class ApiController < ApplicationController
   end
 
   def report
-    id = params[:device_id]
+    id = report_params[:device_id]
     if !Device.exists?(id: id)
       render json: {error: "no device for that id found"}, status: 500
       return
     end
-    report = Report.new
-    report.device_id = id
-    sender = parse_phone(params[:sender])
+    @report = Report.new(report_params)
+    sender = parse_phone(report_params[:sender])
     if !sender
       render json: {error: "sender number is invalid"}, status: 500
       return
     end
-    report.sender = sender
-    report.message = params[:message]
-    if report.save
+    @report.sender = sender
+    if @report.save
       render :nothing => true, status: :created
     else
       render json: {error: "report could not be created"}, status: 500
@@ -96,4 +93,7 @@ class ApiController < ApplicationController
     params.require(:device).permit(:phone_number, :carrier)
   end
 
+  def report_params
+    params.require(:report).permit(:device_id, :sender, :message)
+  end
 end
